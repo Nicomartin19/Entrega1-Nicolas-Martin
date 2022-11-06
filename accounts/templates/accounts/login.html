@@ -1,0 +1,19 @@
+{% extends 'home/base.html' %}
+
+{% block title_pagina %}
+<title>Iniciar Sesion</title>
+{% endblock title_pagina %}
+
+
+{% block  mi_contenido %}
+  
+<form action={% url 'login' %} method="POST">
+   {% csrf_token %}
+   <table>
+   {{formulario}}
+   </table>
+    <button>Iniciar sesion</button>
+
+</form>
+
+{% endblock mi_contenido %}
