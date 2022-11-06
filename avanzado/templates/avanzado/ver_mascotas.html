@@ -1,0 +1,37 @@
+{% extends 'home/base.html' %}
+    
+{% block title_pagina %}
+<title>Ver Mascotas</title>
+{% endblock title_pagina %}
+
+{% block  mi_contenido %}
+    <a class="navbar-brand" href={% url 'crear_mascota' %}>Crear Mascota</a>
+    <p>Listado de Mascotas:</p>
+
+    <form action={% url 'ver_mascotas' %} method="GET">
+       
+       
+        {{formulario}}
+        
+        <button>Buscar</button>
+    </form>
+
+   <p> 
+
+        {% if mascotas %}
+            {% for mascota in mascotas %}
+            <li>
+                {{mascota}}
+                
+                    <a href={% url 'editar_mascota' mascota.id %}>Editar</a>
+                    <a href={% url 'eliminar_mascota' mascota.id %}>Elimiar</a>
+                
+            </li>  
+            {% endfor %}
+        {% else %}
+            
+            <p>La mascota que intenta buscar, no aparece en el listado.</p>
+               
+        {% endif %}
+    </p>
+{% endblock mi_contenido %}

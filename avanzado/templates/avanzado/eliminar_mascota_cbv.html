@@ -1,0 +1,21 @@
+{% extends 'home/base.html' %}
+
+{% block title_pagina %}
+<title>Elimiar Mascota</title>
+{% endblock title_pagina %}
+
+
+{% block  mi_contenido %}
+  
+<form action={% url 'eliminar_mascota' object.id %} method="POST">
+   {% csrf_token %}
+  
+   <p>
+        Esta seguro que quiere elimiar la mascota {{object}}
+   </p>
+   
+   <button>Confirmar</button>
+
+</form>
+
+{% endblock mi_contenido %}
