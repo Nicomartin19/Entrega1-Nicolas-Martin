@@ -69,7 +69,10 @@ def crear_persona(request):
             nombre = data["nombre"]
             apellido = data["apellido"]
             edad = data["edad"]
-            fecha_creacion = data.get("fecha_creacion", datetime.now())
+            fecha_creacion = data["fecha_creacion"]
+            if not fecha_creacion:
+                fecha_creacion = datetime.now()
+            
             persona = Humano(nombre=nombre, apellido=apellido, edad=edad, fecha_creacion=fecha_creacion)
             persona.save()
         
@@ -96,7 +99,3 @@ def ver_personas(request):
 def index(request):
     
     return render(request, "home/index.html")
-
-def nosotros(request):
-    return render(request, "home/nosotros.html")
-    

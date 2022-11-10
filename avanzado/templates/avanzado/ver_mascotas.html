@@ -23,6 +23,7 @@
             <li>
                 {{mascota}}
                 
+                    <a href={% url 'ver_mascota' mascota.id %}>{{mascota}}</a>
                     <a href={% url 'editar_mascota' mascota.id %}>Editar</a>
                     <a href={% url 'eliminar_mascota' mascota.id %}>Elimiar</a>
                 

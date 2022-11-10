@@ -4,20 +4,20 @@ from pyexpat import model
 from statistics import mode
 from django.shortcuts import redirect, render
 from avanzado.models import Mascota
-from avanzado.forms import MascotaFormulario
+from avanzado.forms import MascotaFormulario, BusquedaMascota
 
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-def ver_mascotas(request):
+# def ver_mascotas(request):
     
-    mascotas = Mascota.objects.all()
+#     mascotas = Mascota.objects.all()
     
-    return render(request, "avanzado/ver_mascotas.html", {"mascotas": mascotas})
+#     return render(request, "avanzado/ver_mascotas.html", {"mascotas": mascotas})
 
 @login_required
 def crear_mascota(request):
@@ -33,7 +33,8 @@ def crear_mascota(request):
             nombre=datos["nombre"], 
             tipo=datos["tipo"], 
             edad=datos["edad"],
-            fecha_nacimiento=datos["fecha_nacimiento"]
+            fecha_nacimiento=datos["fecha_nacimiento"],
+           
             )
             mascota.save()
             return redirect("ver_mascotas")
@@ -86,18 +87,31 @@ class ListaMascota(ListView):
     model = Mascota
     template_name = "avanzado/ver_mascotas_cbv.html"
     
+    def get_queryset(self):
+        nombre = self.request.GET.get("nombre", "")
+        if nombre:
+            object_list = self.model.objects.filter(nombre=nombre)
+        else: 
+            object_list = self.model.objects.all()
+        return object_list
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context ["formulario"] = BusquedaMascota()
+        return context
+    
 class CrearMascota(CreateView):
     model = Mascota
     success_url = "/avanzado/mascotas/"
     template_name = "avanzado/crear_mascota_cbv.html"
-    fields = ["nombre", "tipo", "edad", "fecha_nacimiento"]
+    fields = ["nombre", "tipo", "edad", "fecha_nacimiento", "descripcion"]
     
 
 class EditarMascota(LoginRequiredMixin, UpdateView):
     model = Mascota
     success_url = "/avanzado/mascotas/"
     template_name = "avanzado/editar_mascota_cbv.html"
-    fields = ["nombre", "tipo", "edad", "fecha_nacimiento"]
+    fields = ["nombre", "tipo", "edad", "fecha_nacimiento", "descripcion"]
     
 class EliminarMascota(LoginRequiredMixin, DeleteView):
     model = Mascota
@@ -106,6 +120,8 @@ class EliminarMascota(LoginRequiredMixin, DeleteView):
     
     
     
-# class VerMascota():
+class VerMascota(DetailView):
+    model = Mascota
+    template_name = "avanzado/ver_mascota.html"
     
     

@@ -13,6 +13,7 @@ urlpatterns=[
     # path("mascotas/crear/", views.CrearMascota.as_view(), name="crear_mascota"),
     path("mascotas/editar/<int:pk>", views.EditarMascota.as_view(), name="editar_mascota"),
     path("mascotas/eliminar/<int:pk>", views.EliminarMascota.as_view(), name="eliminar_mascota"),
+    path("mascotas/ver/<int:pk>", views.VerMascota.as_view(), name="ver_mascota"),
     
     
 ]

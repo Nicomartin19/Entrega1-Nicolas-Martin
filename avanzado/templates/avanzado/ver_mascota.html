@@ -1,0 +1,17 @@
+{% extends 'home/base.html' %}
+    
+{% block title_pagina %}
+<title>Mascota</title>
+{% endblock title_pagina %}
+
+{% block  mi_contenido %}
+    <p>
+        <li>Nombre: {{mascota.nombre}}</li>
+        <li>Tipo: {{mascota.tipo}}</li>
+        <li>Edad: {{mascota.edad}}</li>
+        <li>Fecha Nacimiento: {{mascota.fecha_nacimiento}}</li>
+        <li>Descripcion: {{mascota.descripcion | safe}}</li>
+    </p>
+
+    
+{% endblock mi_contenido %}
