@@ -13,11 +13,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-# def ver_mascotas(request):
+def ver_mascotas(request):
     
-#     mascotas = Mascota.objects.all()
+    mascotas = Mascota.objects.all()
     
-#     return render(request, "avanzado/ver_mascotas.html", {"mascotas": mascotas})
+    return render(request, "avanzado/ver_mascotas.html", {"mascotas": mascotas})
 
 @login_required
 def crear_mascota(request):
@@ -45,6 +45,7 @@ def crear_mascota(request):
         
     return render(request, "avanzado/crear_mascota.html", {"formulario": formulario})
 
+@login_required
 def editar_mascota(request, id):
     mascota= Mascota.objects.get(id=id)
     
@@ -75,6 +76,7 @@ def editar_mascota(request, id):
         
     return render(request, "avanzado/editar_mascota.html", {"formulario": formulario, "mascota": mascota})
 
+@login_required
 def eliminar_mascota(request, id):
     
     mascota= Mascota.objects.get(id=id)
@@ -85,7 +87,7 @@ def eliminar_mascota(request, id):
 
 class ListaMascota(ListView):
     model = Mascota
-    template_name = "avanzado/ver_mascotas_cbv.html"
+    template_name = "avanzado/ver_mascotas.html"
     
     def get_queryset(self):
         nombre = self.request.GET.get("nombre", "")
@@ -122,6 +124,8 @@ class EliminarMascota(LoginRequiredMixin, DeleteView):
     
 class VerMascota(DetailView):
     model = Mascota
-    template_name = "avanzado/ver_mascota.html"
+    template_name = "avanzado/ver_mascota_cbv.html"
     
-    
+
+def nosotros(request):
+    return render(request, "avanzado/nosotros.html")

@@ -12,6 +12,7 @@ class Mascota(models.Model):
     fecha_nacimiento = models.DateField()
     descripcion = RichTextField(null=True)
     
+    
     def __str__(self):
-        return f"Nombre: {self.nombre} - Tipo: {self.tipo}"
+        return f"Nombre: {self.nombre} - Tipo: {self.tipo} - Edad: {self.edad}"
     
