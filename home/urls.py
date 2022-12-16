@@ -11,4 +11,10 @@ urlpatterns = [
     path("prueba-template/", views.prueba_template),
     path("ver-personas/", views.ver_personas, name="ver_personas"),
     path("crear-persona/", views.crear_persona, name="crear_persona"),
+<<<<<<< HEAD
+    
 ]
+=======
+    path("nosotros/", views.nosotros, name="nosotros"),
+]
+>>>>>>> 1775887b9ee18e3a3f5c69e44ddebe5f90805f1b
