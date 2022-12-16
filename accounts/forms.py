@@ -20,3 +20,5 @@ class EditarPerfilFormulario(forms.Form):
     last_name = forms.CharField(label = "Apellido")
     avatar = forms.ImageField(required=False)
     
+    
+    

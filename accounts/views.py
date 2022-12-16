@@ -57,6 +57,8 @@ def editar_perfil(request):
            user.email = data_nueva["email"]
            user.extensionusuario.avatar = data_nueva["avatar"]
            
+          
+           
            user.extensionusuario.save()
            user.save()
            
@@ -64,12 +66,15 @@ def editar_perfil(request):
     else:
         formulario = EditarPerfilFormulario(
             initial={
-                "first_name": request.user.first_name , 
-                "last_name": request.user.last_name, 
-                "email": request.user.email,
-                "avatar": request.user.extensionusuario.avatar,
-                    }
-            )
+                "first_name": user.first_name, 
+                "last_name": user.last_name, 
+                "email": user.email,
+                "avatar": user.extensionusuario.avatar,
+                
+                
+                
+            }
+        )
     
     return render(request, "accounts/editar_perfil.html", {"formulario": formulario})
 
